@@ -1,3 +1,4 @@
+using ExpensesWorker.Application;
 using ExpensesWorker.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ namespace ExpensesWorker
             });
 
             builder.Services.AddScoped<IExpensesService, ExpensesService>();
+            builder.Services.AddScoped<ISellingExpenses79Service, SellingExpenses79Service>();
 
             var host = builder.Build();
             host.Run();

@@ -1,11 +1,11 @@
 ﻿using ExpensesWorker.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExpensesWorker
+namespace ExpensesWorker.Application
 {
     public interface IExpensesService
     {
-        Task HandleExpensesItems();
+        Task HandleExcel();
     }
 
     internal class ExpensesService(AppDbContext dbContext, IConfiguration configuration) : IExpensesService
@@ -13,16 +13,22 @@ namespace ExpensesWorker
         private readonly AppDbContext _dbContext = dbContext;
         private readonly IConfiguration _configuration = configuration;
 
-        public async Task HandleExpensesItems()
+        public async Task HandleExcel()
         {
             await _dbContext.ExpenseItems.ExecuteDeleteAsync();
+            await _dbContext.ExpenseValues.ExecuteDeleteAsync();
 
             var allowedRoots = _configuration.GetSection("AllowedRoots").Get<string[]>()
                 ?? throw new InvalidOperationException("AllowedRoots Not Found");
 
-            var nodes = ExcelReader.ParseFirstColumn("Data/РL_2025.xlsx", allowedRoots);
+            var filePath = _configuration.GetSection("FilePath").Get<string>()
+                ?? throw new InvalidOperationException("FilePath Not Found");
 
-            await _dbContext.AddRangeAsync(nodes);
+            var result = ExcelReader_РL_2025.ParseExcel(filePath, allowedRoots);
+
+            await _dbContext.ExpenseItems.AddRangeAsync(result.Items);
+
+            await _dbContext.ExpenseValues.AddRangeAsync(result.Values);
 
             await _dbContext.SaveChangesAsync();
         }

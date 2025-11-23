@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ExpensesWorker
+namespace ExpensesWorker.Domain
 {
     internal class ExpenseItem
     {
         public int Id { get; set; }
-        public string Name { get; set; } = "";
+
+        [MaxLength(400)]
+        public string? Name { get; set; }
+
         public int Level { get; set; }
+
         public int? ParentId { get; set; }
     }
 }
