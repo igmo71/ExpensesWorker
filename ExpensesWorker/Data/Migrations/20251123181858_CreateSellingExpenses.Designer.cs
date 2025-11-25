@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpensesWorker.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251123151931_CreateSellingExpenses79")]
-    partial class CreateSellingExpenses79
+    [Migration("20251123181858_CreateSellingExpenses")]
+    partial class CreateSellingExpenses
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,62 +65,48 @@ namespace ExpensesWorker.Data.Migrations
                     b.ToTable("ExpenseValues");
                 });
 
-            modelBuilder.Entity("ExpensesWorker.Domain.SellingExpenses79", b =>
+            modelBuilder.Entity("ExpensesWorker.Domain.SellingExpenses", b =>
                 {
-                    b.Property<int>("_year")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("_month")
                         .HasColumnType("int");
 
-                    b.Property<string>("Подразделение")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("НаборСтатей")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Статья")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("СпособДоставки")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("КаналРеализации")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Склад")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("Номенклатура_Key")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("CALCBASE")
-                        .HasColumnType("float");
+                    b.Property<int>("_year")
+                        .HasColumnType("int");
 
                     b.Property<string>("year_month")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Вес")
-                        .HasColumnType("float");
+                    b.Property<string>("КаналРеализации")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Количество")
-                        .HasColumnType("float");
+                    b.Property<string>("НаборСтатей")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Номенклатура_Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Подразделение")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Расчетное_Значение")
                         .HasColumnType("float");
 
-                    b.Property<double>("РублиЗаКг")
-                        .HasColumnType("float");
+                    b.Property<string>("Склад")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Сумма")
-                        .HasColumnType("float");
+                    b.Property<string>("СпособДоставки")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("СуммаВыручки")
-                        .HasColumnType("float");
+                    b.Property<string>("Статья")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("_year", "_month", "Подразделение", "НаборСтатей", "Статья", "СпособДоставки", "КаналРеализации", "Склад", "Номенклатура_Key");
+                    b.HasKey("Id");
 
-                    b.ToTable("Expense_Затраты_по_реализациям_79", (string)null);
+                    b.ToTable("Expense_Затраты_по_реализациям", (string)null);
                 });
 #pragma warning restore 612, 618
         }

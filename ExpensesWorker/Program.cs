@@ -19,7 +19,7 @@ namespace ExpensesWorker
             });
 
             builder.Services.AddScoped<IExpensesService, ExpensesService>();
-            builder.Services.AddScoped<ISellingExpenses79Service, SellingExpenses79Service>();
+            builder.Services.AddScoped<ISellingExpensesService, SellingExpensesService>();
 
             var host = builder.Build();
             host.Run();

@@ -21,10 +21,10 @@ namespace ExpensesWorker.Application
             var allowedRoots = _configuration.GetSection("AllowedRoots").Get<string[]>()
                 ?? throw new InvalidOperationException("AllowedRoots Not Found");
 
-            var filePath = _configuration.GetSection("FilePath").Get<string>()
+            var filePath = _configuration.GetSection("ExpensesFilePath").Get<string>()
                 ?? throw new InvalidOperationException("FilePath Not Found");
 
-            var result = ExcelReader_РL_2025.ParseExcel(filePath, allowedRoots);
+            var result = ExpensesExcelReader.ParseExcel(filePath, allowedRoots);
 
             await _dbContext.ExpenseItems.AddRangeAsync(result.Items);
 

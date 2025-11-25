@@ -3,7 +3,7 @@ using ExpensesWorker.Domain;
 
 namespace ExpensesWorker.Application;
 
-internal class ExcelReader_РL_2025
+internal class ExpensesExcelReader
 {
     public static (List<ExpenseItem> Items, List<ExpenseValue> Values)
     ParseExcel(string filePath, string[] allowedRoots)

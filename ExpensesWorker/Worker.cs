@@ -36,7 +36,7 @@ namespace ExpensesWorker
         {
             using var scope = scopeFactory.CreateScope();
 
-            var expensesService = scope.ServiceProvider.GetRequiredService<ISellingExpenses79Service>();
+            var expensesService = scope.ServiceProvider.GetRequiredService<ISellingExpensesService>();
 
             await expensesService.HandleCsv();
 
